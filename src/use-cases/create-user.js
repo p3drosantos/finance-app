@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 
 import { PostgresCreateUserRepository } from '../repositories/postgres/create-user.js'
 
@@ -19,9 +19,9 @@ export class CreateUserUseCase {
         }
 
         //chamar o repositorio
-        const PostgresCreateUseRepository = new PostgresCreateUserRepository()
+        const postgresCreateUserRepository = new PostgresCreateUserRepository()
 
-        const createdUser = await PostgresCreateUseRepository.execute(user)
+        const createdUser = await postgresCreateUserRepository.execute(user)
 
         return createdUser
     }
