@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 
 import { PostgresCreateUserRepository } from '../repositories/postgres/create-user.js'
 import { PostgresGetUserByEmailRepository } from '../repositories/postgres/get-user-by-email.js'
+import { EmailAlreadyExistsError } from '../errors/user.js'
 
 export class CreateUserUseCase {
     async execute(createUserParams) {
@@ -16,7 +17,7 @@ export class CreateUserUseCase {
             )
 
         if (userAlreadyExists) {
-            throw new Error('User already exists')
+            throw new EmailAlreadyExistsError(createUserParams.email)
         }
 
         //gerar senha do user
